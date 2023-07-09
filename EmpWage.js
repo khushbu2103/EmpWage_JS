@@ -1,6 +1,6 @@
 console.log("Welcome to the Employee Wage program")
 
-////UC4 Employee Wage for a month ////
+////UC6 Storing EmpWage And TotalWage In Array ////
 let IS_FULL_TIME = 1;
 let IS_PART_TIME = 2;
 const EMP_RATE_PER_HOUR=20;
@@ -12,6 +12,7 @@ let empWage=0;
 let totalWage=0;
 let totalEmpHrs=0;
 let day=1;
+let EmpDailyWageArray = new Array()
 function GetWorkingHrs(empCheck)
 {  
 switch(empCheck)
@@ -33,10 +34,19 @@ while(totalEmpHrs<=TOTAL_HOURS_IN_MONTH && day<=NUM_OF_WORKING_DAYS)
 {
     let empCheck= (Math.floor(Math.random()*10)%3);
     empWage = GetWorkingHrs(empCheck)*EMP_RATE_PER_HOUR
+    EmpDailyWageArray.push(empWage);
     totalWage+=empWage;
     day++
     totalEmpHrs+=empHrs;
     console.log("Employee daily wage for day "+ day + " is "+ empWage)
 }
 
-console.log("Employee Total Wage:"+ totalWage);
+console.log("Employee Total Wage without using array: "+ totalWage);
+console.log(EmpDailyWageArray);
+
+let total= 0;
+for(let element of EmpDailyWageArray)
+{
+    total+=element;
+}
+console.log("Total wage using array: "+ total)
