@@ -13,6 +13,7 @@ let totalWage=0;
 let totalEmpHrs=0;
 let day=1;
 let EmpDailyWageArray = new Array()
+let empDayAlogWithWageMap= new Map()
 function GetWorkingHrs(empCheck)
 {  
 switch(empCheck)
@@ -36,6 +37,7 @@ while(totalEmpHrs<=TOTAL_HOURS_IN_MONTH && day<=NUM_OF_WORKING_DAYS)
     empWage = GetWorkingHrs(empCheck)*EMP_RATE_PER_HOUR
     EmpDailyWageArray.push(empWage);
     totalWage+=empWage;
+    empDayAlogWithWageMap.set(day, empWage)
     day++
     totalEmpHrs+=empHrs;
     console.log("Employee daily wage for day "+ day + " is "+ empWage)
@@ -97,6 +99,9 @@ function GetTotalWorkingDays(totalWorkingDays, dailyWage)
     else 
     return totalWorkingDays;
 }
-
-
 console.log("UC7G using reduce helper function finding total number of working days: "+EmpDailyWageArray.reduce(GetTotalWorkingDays, 0))
+
+console.log(empDayAlogWithWageMap)
+
+//converting object into array nd store 
+console.log("using map object finding total wage: "+ Array.from(empDayAlogWithWageMap.values()).reduce(GetTotalWageUsingReduce, 0))
