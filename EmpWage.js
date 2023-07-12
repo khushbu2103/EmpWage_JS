@@ -14,6 +14,10 @@ let totalEmpHrs=0;
 let day=1;
 let EmpDailyWageArray = new Array()
 let empDayAlogWithWageMap= new Map()
+let empDayAlogWithHrsMap= new Map()
+let fullTimeDaysArray = new Array()
+let partTimeDaysArray = new Array()
+let noWorkingDaysArray = new Array()
 function GetWorkingHrs(empCheck)
 {  
 switch(empCheck)
@@ -38,8 +42,10 @@ while(totalEmpHrs<=TOTAL_HOURS_IN_MONTH && day<=NUM_OF_WORKING_DAYS)
     EmpDailyWageArray.push(empWage);
     totalWage+=empWage;
     empDayAlogWithWageMap.set(day, empWage)
+    empDayAlogWithHrsMap.set(day, empHrs)
     day++
     totalEmpHrs+=empHrs;
+   
     console.log("Employee daily wage for day "+ day + " is "+ empWage)
 }
 
@@ -105,3 +111,36 @@ console.log(empDayAlogWithWageMap)
 
 //converting object into array nd store 
 console.log("using map object finding total wage: "+ Array.from(empDayAlogWithWageMap.values()).reduce(GetTotalWageUsingReduce, 0))
+
+console.log(empDayAlogWithHrsMap)
+
+let getTotal=(total, input)=>
+{
+    return total+input;
+}
+let totalWageUsingArrow=Array.from(empDayAlogWithWageMap.values()).filter(wage=>wage>0).reduce(getTotal,0)
+console.log("UC-9A total wage using arrow function and also map object: "+totalWageUsingArrow)
+
+let totalHrsUsingArrow=Array.from(empDayAlogWithHrsMap.values()).filter(wage=>wage>0).reduce(getTotal,0)
+console.log("UC-9A total hours using arrow function and also map object: "+totalHrsUsingArrow)
+
+empDayAlogWithHrsMap.forEach((value, key, map)=>
+{
+    if(value==8)
+    {
+        fullTimeDaysArray.push(key)
+    }
+    else if(value==4)
+    {
+        partTimeDaysArray.push(key)
+    }
+    else
+    {
+        noWorkingDaysArray.push(key)
+    }
+})
+
+console.log("UC-9B displaying all working days based on hrs")
+console.log("full time days"+ fullTimeDaysArray)
+console.log("part time days"+partTimeDaysArray)
+console.log("no working days"+noWorkingDaysArray)
