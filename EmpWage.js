@@ -18,6 +18,7 @@ let empDayAlogWithHrsMap= new Map()
 let fullTimeDaysArray = new Array()
 let partTimeDaysArray = new Array()
 let noWorkingDaysArray = new Array()
+let empDayAlongWithWageAndHrsArray = new Array()
 function GetWorkingHrs(empCheck)
 {  
 switch(empCheck)
@@ -43,6 +44,16 @@ while(totalEmpHrs<=TOTAL_HOURS_IN_MONTH && day<=NUM_OF_WORKING_DAYS)
     totalWage+=empWage;
     empDayAlogWithWageMap.set(day, empWage)
     empDayAlogWithHrsMap.set(day, empHrs)
+    empDayAlongWithWageAndHrsArray.push( 
+    {
+        dayCount: day,
+        dailyHrs: empHrs,
+        wage: empWage,
+        toString()
+        {
+            return "\nday:"+this.dayCount+ " hrs:"+this.dailyHrs+ " wage:" +this.wage
+        }
+    })
     day++
     totalEmpHrs+=empHrs;
    
@@ -144,3 +155,5 @@ console.log("UC-9B displaying all working days based on hrs")
 console.log("full time days"+ fullTimeDaysArray)
 console.log("part time days"+partTimeDaysArray)
 console.log("no working days"+noWorkingDaysArray)
+
+console.log("UC-10 representing employee's daily wages, hrs, and days by using js object concepy"+empDayAlongWithWageAndHrsArray)
